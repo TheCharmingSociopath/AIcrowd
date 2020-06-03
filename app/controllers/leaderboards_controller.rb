@@ -95,12 +95,15 @@ class LeaderboardsController < ApplicationController
     @leaderboards = if @challenge.challenge == "NeurIPS 2019 : Disentanglement Challenge"
       DisentanglementLeaderboard
         .where(challenge_round_id: @current_round)
+        .freeze_record(current_participant)
     elsif post_challenge?
       policy_scope(OngoingLeaderboard)
         .where(filter)
+        .freeze_record(current_participant)
     else
       policy_scope(Leaderboard)
         .where(filter)
+        .freeze_record(current_participant)
     end
   end
 
