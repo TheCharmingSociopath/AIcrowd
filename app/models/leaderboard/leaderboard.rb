@@ -3,6 +3,7 @@ class Leaderboard < SqlView
   after_initialize :readonly!
 
   include PolymorphicSubmitter
+  include FreezeRecord
   belongs_to :challenge
   belongs_to :challenge_round
   belongs_to :submission
