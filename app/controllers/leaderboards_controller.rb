@@ -32,6 +32,12 @@ class LeaderboardsController < ApplicationController
     @follow           = @challenge.follows.find_by(participant_id: current_participant.id) if current_participant.present?
     @challenge_rounds = @challenge.challenge_rounds.started
     @post_challenge   = post_challenge?
+
+    if current_participant.present? && @leaderboards.freeze_duration?(current_participant)
+      @current_participant_leaderboard = @leaderboards.where(submitter_id: current_participant.id)
+      @old_leaderbaords                = @leaderboards - @current_participant_leaderboard
+    end
+
     unless is_disentanglement_leaderboard?(@leaderboards.first)
       @countries = @filter.call('participant_countries')
       @affiliations = @filter.call('participant_affiliations')

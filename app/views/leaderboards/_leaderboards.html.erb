@@ -9,7 +9,7 @@
       <td class="leaderboard-change">
         <%= leaderboard_ranking_change(leaderboard) %>
       </td>
-      <td><strong><%= "%02d" % (leaderboard.row_num) %></strong></td>
+      <td><strong><%= "%02d" % (defined?(seq) ? seq+1 : leaderboard.row_num) %></strong></td>
       <td>
         <% if participants.empty? %>
           <%= image_tag default_image_url, class: 'avatar' %>

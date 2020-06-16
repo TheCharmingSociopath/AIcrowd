@@ -8,7 +8,7 @@ module FreezeRecord
       return all if !participant.present? || participant_is_organizer(participant.email) || all.where(submitter_type: "Participant").pluck(:submitter_id).exclude?(participant.id)
 
       ch_round = first.challenge_round
-      if ch_round.freeze_flag && freeze_time(ch_round, participant.id)
+      if freeze_duration?(participant)
         freeze_beyond_time = Time.now.utc - ch_round.freeze_duration.to_i.hours
 
         participant_and_before_freeze_record = where("submitter_id = ? OR created_at < ?", participant.id, freeze_beyond_time)
@@ -26,6 +26,11 @@ module FreezeRecord
     def self.freeze_time(ch_round, participant_id)
       submission_time = ch_round.submissions.where(participant_id: participant_id).order(created_at: :desc).first.created_at
       Time.now.utc - submission_time < ch_round.freeze_duration * 60 * 60
+    end
+
+    def self.freeze_duration?(participant)
+      ch_round = first.challenge_round
+      ch_round.freeze_flag && freeze_time(ch_round, participant.id)
     end
   end
 end
