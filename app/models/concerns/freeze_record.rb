@@ -24,8 +24,11 @@ module FreezeRecord
     end
 
     def self.freeze_time(ch_round, participant_id)
-      submission_time = ch_round.submissions.where(participant_id: participant_id).order(created_at: :desc).first.created_at
-      Time.now.utc - submission_time < ch_round.freeze_duration * 60 * 60
+      participant_submission = ch_round.submissions.where(participant_id: participant_id).order(created_at: :desc).first
+      if participant_submission.present?
+        submission_time = participant_submission.created_at
+        Time.now.utc - submission_time < ch_round.freeze_duration * 60 * 60
+      end
     end
 
     def self.freeze_duration?(participant)
