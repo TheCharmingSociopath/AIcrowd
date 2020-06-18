@@ -1,11 +1,9 @@
-require 'active_support/concern'
-
 module FreezeRecord
   extend ActiveSupport::Concern
 
   included do
     def self.freeze_record(participant)
-      return all if !participant.present? || participant_is_organizer(participant.email) || all.where(submitter_type: "Participant").pluck(:submitter_id).exclude?(participant.id)
+      return all if participant.blank? || self.count == 0 || participant_is_organizer(participant.email) || all.where(submitter_type: "Participant").pluck(:submitter_id).exclude?(participant.id)
 
       ch_round = first.challenge_round
       if freeze_duration?(participant)
@@ -32,6 +30,8 @@ module FreezeRecord
     end
 
     def self.freeze_duration?(participant)
+      return if self.count == 0
+
       ch_round = first.challenge_round
       ch_round.freeze_flag && freeze_time(ch_round, participant.id)
     end

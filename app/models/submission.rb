@@ -123,7 +123,7 @@ class Submission < ApplicationRecord
   end
 
   def self.freeze_record(participant, current_round, challenge)
-    return all if !participant.present? || participant_is_organizer(participant.email, challenge) || all.pluck(:participant_id).exclude?(participant.id)
+    return all if participant.blank? || participant_is_organizer(participant.email, challenge) || all.pluck(:participant_id).exclude?(participant.id)
 
     if current_round.freeze_flag && freeze_time(current_round, participant.id)
       freeze_beyond_time = Time.now.utc - current_round.freeze_duration.to_i.hours
