@@ -10,6 +10,9 @@ module Challenges
 
     def set_challenge
       @challenge = Challenge.friendly.find(params[:challenge_id])
+      if params.has_key?('meta_challenge_id')
+        @meta_challenge = Challenge.includes(:organizers).friendly.find(params[:meta_challenge_id])
+      end
     end
 
     def set_current_round
