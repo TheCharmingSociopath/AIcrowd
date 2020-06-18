@@ -45,9 +45,9 @@
 // require pages/email_preferences_edit
 
 // -------------------- Controllers ------------------- //
+//= require controllers/challenges/dataset_files_controller
 //= require controllers/challenges_controller
 //= require controllers/leaderboards_controller
-//= require controllers/dataset_files_controller
 //= require controllers/task_dataset_files_controller
 //= require controllers/participants_controller
 // require controllers/email_preferences_controller

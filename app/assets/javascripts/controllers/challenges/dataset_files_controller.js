@@ -15,8 +15,10 @@ function fileFieldVisibility(){
   }
 };
 
-Paloma.controller('DatasetFiles', {
+Paloma.controller('Challenges::DatasetFiles', {
   new: function(){
+    console.log('SADASDASD DSDADSA')
+    debugger;
     fileFieldVisibility();
     $("input[name='dataset_file[hosting_location]']").on('click', fileFieldVisibility);
   },
