@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
   end
 
   def notifications
-    @notifications = current_user&.notifications
+    @notifications = current_user&.notifications.active
   end
 
   private

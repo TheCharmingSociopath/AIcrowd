@@ -98,7 +98,7 @@ class ParticipantsController < ApplicationController
   end
 
   def notifications_message
-    @notifications = current_user.notifications
+    @notifications = current_user.notifications.active
   end
 
   def read_notification
