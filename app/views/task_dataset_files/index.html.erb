@@ -2,7 +2,7 @@
 <%= render partial: 'challenges/show/subnav', locals: { challenge: @challenge } %>
 
 <% if @clef_task.use_challenge_dataset_files? && participant_clef_task_status(@current_participant_clef_task) == 'registered' %>
-  <%= render partial: 'dataset_files/dataset_files' %>
+  <%= render partial: 'challenges/dataset_files/dataset_files' %>
 <% else %>
   <!-- section -->
   <section class="section-p-sm">

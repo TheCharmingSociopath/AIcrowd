@@ -17,7 +17,7 @@
         <ul class="list-group list-group-flush-px-0 list-group-dataset">
           <hr/>
           <% @dataset_folders.each do |dataset_folder| %>
-            <%= render partial: 'dataset_files/dataset_folder', locals: { dataset_folder: dataset_folder, challenge: @challenge } %>
+            <%= render partial: 'challenges/dataset_files/dataset_folder', locals: { dataset_folder: dataset_folder, challenge: @challenge } %>
             <% dataset_folder.dataset_files&.each do |dataset_file| %>
               <%= render partial: 'shared/challenges/dataset_file', locals: { dataset_file: dataset_file, challenge: @challenge, folder_item: true } %>
             <% end %>

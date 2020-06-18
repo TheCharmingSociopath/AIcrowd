@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe DatasetFilesController, type: :controller do
+describe Challenges::DatasetFilesController, type: :controller do
   render_views
 
   let!(:challenge)             { create(:challenge, :running) }
