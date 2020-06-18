@@ -27,7 +27,6 @@ def challenge_routes
     get :deny, on: :collection
   end
   resources :events
-  resources :winners, only: [:index]
   resources :submissions do
     post :filter, on: :collection
     get :export, on: :collection
@@ -208,10 +207,12 @@ Rails.application.routes.draw do
   end
 
   resources :challenges, only: [], module: :challenges do
+    resources :winners, only: :index
     resource :discussion, only: :show
     resource :newsletter_emails, only: [:new, :create]
 
     resources :problems, only: :show do |problem|
+      resources :winners, only: :index
       resource :discussion, only: :show
       resource :newsletter_emails, only: [:new, :create]
     end
