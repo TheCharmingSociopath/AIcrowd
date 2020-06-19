@@ -25,6 +25,7 @@ class Notification < ApplicationRecord
   end
 
   def self.active
+    return all if count.zero?
     participant      = first.participant
     part_leaderboard = participant.leaderboards
 
